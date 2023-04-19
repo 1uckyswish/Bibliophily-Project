@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eeade703f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./search.css">
     <title>Bibliophily</title>
 </head>
 <body>
@@ -18,21 +19,21 @@
             <h1>Bibliophily</h1>
         </div>
         <div class="header-nav">
-            <a href="details.html">About Us</a>
+            <a href="">About Us</a>
             <a href="">Contact</a>
+            <a href="index.html">Home</a>
         </div>
     </header>
     <div class="content-container">
         <div class="content-nav">
             <h2>Book Finder</h2>
             <span>
-                <input type="text" placeholder="Search by Book Title or Author..." >
-                <a href="search.html"><img src="assets/searchicon.png" alt=""></a>
+                <input type="text" placeholder="Search by Book Title or Author..." img="assets/searchicon.png">
+                <img src="assets/searchicon.png" alt="">
             </span>
-            <p>"Find Inspiration, Find Knowledge - Search for Your Next Book Today!"</p>
+            <p>"Get lost in a story that speaks to you."</p>
         </div>
-        <img src="assets/searchimg.png" id="searchImg">
-        <img src="assets/bookstacks.png" id="bookStacks">
+        <div id="search-results"></div>
     </div>
     <footer>
         <p>© Copyright 2020 Bibliophily. All rights reserved.</p>
@@ -41,6 +42,6 @@
          <img src="assets/linkedin.png" alt="">
     
     </footer>
-    <script src="./index.js"></script>
+    <script src="./search.js"></script>
 </body>
 </html>

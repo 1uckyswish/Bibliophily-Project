@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'cormorant sc', serif;
+}
+a{
+    text-decoration: none;
+}
+
+:root{
+    --White-Text: #ffffff;
+    --Black-Text: #000000;
+    --Dark-Blue: #004E7C;
+    --Maroon: #591C0B;
+    --Book-Card-Background-Color: #D9D9D9;
+    --Background-color: #DCE1E3;
+    --Details-Page-Description-Box: #ADAFAB;
+    --Book-Details-box:#FFFFFF;
+    --Text-Font: font-family: 'Cormorant SC', serif;
+    --Text-Style: font-style: italic;
+}
+
+/**************** Default Styles ****************/
+
+/*** header ***/
+
+header{
+    background-color: var(--Dark-Blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.header-title{
+    display: flex;
+    gap: 3px;
+    margin-left: 20px;
+    color: var(--White-Text);
+}
+
+.header-title img{
+    width: 35px;
+    height: 35px;   
+    
+    
+}
+
+.header-nav a{
+    color: var(--White-Text);
+    margin-right: 20px;
+}
+
+
+/** main content **/
+
+.content-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.content-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+
+}
+.content-nav h2 {
+    font-size: 50px;
+    font-weight: bolder;
+    letter-spacing: 5px;
+}
+.content-nav p{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+span{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+span input{
+    height: 40px;
+    width: 50%;
+    padding-left: 10px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+span img{
+    width: 50px;
+    height: 50px;
+    margin-left: -45px;
+
+}
+
+#searchImg{
+    align-self: self-end;
+    width: 300px;
+    height: 300px;
+    margin-top: -220px;
+    margin-right: 40px;
+
+}
+
+#bookStacks{
+    width: 400px;
+    padding-top: 100px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+
+/** footer **/
+
+footer{
+    height: 80px;
+    background-color: var(--Maroon);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: var(--White-Text);
+    padding-right: 20px;
+    
+}
+
+footer p{
+    margin: auto;
+    padding-left: 180px;
+}
+
+footer img{
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
