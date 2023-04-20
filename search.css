@@ -1,0 +1,46 @@
+#search-results{
+    background-color: var(--Background-color);
+    height: 900px;
+}
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 30px;
+}
+
+.card{
+    background-color: var(--Details-Page-Description-Box);
+    border-radius: 10px;
+    display: flex;
+    height: auto;
+    width: auto;
+    justify-content: space-between;
+}
+
+.card-img img{
+width: 152px;
+height: auto;
+left: 78px;
+top: 380px;
+border-radius: 10px;
+}
+
+.card-details{
+    display: flex;
+    flex-direction: column;
+}
+
+.card-details p{
+box-sizing: border-box;
+width: 219px;
+height: 33px;
+left: 677px;
+top: 391px;
+font-family: 'Sedan SC';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 33px;
+}

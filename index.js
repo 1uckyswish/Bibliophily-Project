@@ -1,1 +1,0 @@
-alert("Hello Matthew and Ruby");
