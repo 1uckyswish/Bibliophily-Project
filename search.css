@@ -24,12 +24,11 @@ body{
     display: flex;
     height: auto;
     width: auto;
-    justify-content: space-between;
 }
 
 .card-img img{
     width: 152px;
-    height: auto;
+    height: 200px;
     left: 78px;
     top: 380px;
     border-radius: 10px;
@@ -84,22 +83,19 @@ body{
 }
 
 .card-details span{
-    osition: absolute;
-width: 70px;
-height: 17px;
-left: 319px;
-top: 447px;
+    width: 70px;
+    height: 17px;
+    left: 319px;
+    top: 447px;
 
-font-family: 'Sedan';
-font-style: italic;
-font-weight: 400;
-font-size: 12px;
-line-height: 17px;
+    font-family: 'Sedan';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
 
-/* identical to box height */
+    /* identical to box height */
 
-color: #000000;
-
-
+    color: #000000;
 }
 
