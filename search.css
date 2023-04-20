@@ -14,8 +14,11 @@ body{
 .card-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 40px;
     margin: 10px;
+    padding: 10px;
+    /* border: 2px solid blue; */
+    width: auto;
 }
 
 .card{
@@ -24,35 +27,25 @@ body{
     display: flex;
     height: auto;
     width: auto;
+    align-items: center;
+    /* border: 2px solid purple; */
 }
 
 .card-img img{
     width: 152px;
-    height: 200px;
-    left: 78px;
-    top: 380px;
+    height: 224px;
     border-radius: 10px;
 }
 
-.card-details{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding-left: 20px;
-}
 
 .card-details h3{
-    box-sizing: border-box;
-    width: 219px;
-    /* height: 33px; */
-    left: 677px;
-    top: 391px;
     font-family: 'Sedan SC';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 33px;
     color: black;
+    align-items: center;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -63,6 +56,13 @@ body{
     font-size: 15px;
     line-height: 21px;
     color: #004E7C;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-left: 10px;
+    width: auto;
+    height: auto;
 }
 
 .card-details button{
@@ -72,10 +72,7 @@ body{
     font-size: 20px;
     line-height: 28px;
     width: 172px;
-    width: 172px;
     height: 33px;
-    left: 259px;
-    top: 829px;
     border: none;
     background: #004E7C;
     border-radius: 20px;
@@ -83,19 +80,26 @@ body{
 }
 
 .card-details span{
-    width: 70px;
-    height: 17px;
-    left: 319px;
-    top: 447px;
-
+    width: auto;
     font-family: 'Sedan';
     font-style: italic;
     font-weight: 400;
     font-size: 12px;
     line-height: 17px;
-
-    /* identical to box height */
-
     color: #000000;
+}
+
+@media screen and (max-width: 1116px) {
+    .card-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .card-container{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
 }
 
