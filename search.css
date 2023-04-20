@@ -1,17 +1,25 @@
+body{
+    background-color: #DCE1E3;
+}
+
+.content-nav img{
+    cursor: pointer;
+}
+
 #search-results{
     background-color: var(--Background-color);
-    height: 900px;
+    height: auto;
 }
 
 .card-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    padding: 30px;
+    margin: 10px;
 }
 
 .card{
-    background-color: var(--Details-Page-Description-Box);
+    background-color: var(--Book-Card-Background-Color);
     border-radius: 10px;
     display: flex;
     height: auto;
@@ -20,27 +28,78 @@
 }
 
 .card-img img{
-width: 152px;
-height: auto;
-left: 78px;
-top: 380px;
-border-radius: 10px;
+    width: 152px;
+    height: auto;
+    left: 78px;
+    top: 380px;
+    border-radius: 10px;
 }
 
 .card-details{
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 20px;
 }
 
-.card-details p{
-box-sizing: border-box;
-width: 219px;
-height: 33px;
-left: 677px;
-top: 391px;
-font-family: 'Sedan SC';
-font-style: normal;
-font-weight: 400;
-font-size: 24px;
-line-height: 33px;
+.card-details h3{
+    box-sizing: border-box;
+    width: 219px;
+    height: 33px;
+    left: 677px;
+    top: 391px;
+    font-family: 'Sedan SC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 33px;
+    color: black;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.card-details{
+    font-family: 'Sedan SC';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    color: #004E7C;
+}
+
+.card-details button{
+    font-family: 'Sedan';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    width: 172px;
+    width: 172px;
+    height: 33px;
+    left: 259px;
+    top: 829px;
+    border: none;
+    background: #004E7C;
+    border-radius: 20px;
+    color: #FFFFFF;
+}
+
+.card-details span{
+    osition: absolute;
+width: 70px;
+height: 17px;
+left: 319px;
+top: 447px;
+
+font-family: 'Sedan';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 17px;
+
+/* identical to box height */
+
+color: #000000;
+
+
+}
+
