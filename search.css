@@ -45,7 +45,7 @@ body{
 .card-details h3{
     box-sizing: border-box;
     width: 219px;
-    height: 33px;
+    /* height: 33px; */
     left: 677px;
     top: 391px;
     font-family: 'Sedan SC';
