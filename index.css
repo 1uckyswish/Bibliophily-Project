@@ -53,6 +53,9 @@ header{
     margin-right: 20px;
 }
 
+.menu-container{
+    display: none;
+}
 
 /** main content **/
 
@@ -67,6 +70,8 @@ header{
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
+    margin-top: -100px;
+    padding-bottom: 100px;
 
 }
 .content-nav h2 {
@@ -102,10 +107,11 @@ span img{
 }
 
 #searchImg{
-    align-self: self-end;
+    
+    align-self: flex-end;
     width: 300px;
     height: 300px;
-    margin-top: -220px;
+    margin-top: -70px;
     margin-right: 40px;
 
 }
@@ -133,11 +139,106 @@ footer{
 
 footer p{
     margin: auto;
-    padding-left: 180px;
+    padding-left: 190px;
 }
 
 footer img{
     width: 40px;
     height: 40px;
     margin-left: 10px;
+}
+
+
+/** media query tablet**/
+@media (max-width: 768px) {
+    #searchImg{
+        align-self: center;
+        margin-bottom: 150px;
+        margin-left: 35px;
+        padding-bottom: 10px;
+        
+    }
+
+
+    #bookStacks{
+        align-self: center;
+        margin: -100px 30px 30px 0px;
+    }
+
+    span input{
+        width: 70%;
+    }
+
+    footer p{
+        margin-left: 10px;
+    }
+    
+}
+
+
+/** media query mobile **/
+@media (max-width: 428px){
+
+    .header-title{
+        margin: auto;
+    }
+
+    .header-nav{
+        display: none;
+    }
+
+    .mobile-menu{
+        display:flex;
+        flex-direction: column;
+        justify-content: end;
+        margin: 140px -40px 0px 0px;
+        padding: 20px 20px 20px 10px;
+        background-color: var(--Dark-Blue);
+        row-gap: 10px;
+        
+
+    }
+
+
+
+    .menu-container{
+        display: block;
+        font-size: 30px;
+        color: var(--White-Text);
+    }
+
+    #searchImg{
+        width: 250px;
+        height: 250px;
+    }
+
+    #bookStacks{
+        width: 300px;
+    }
+
+    .content-nav h2{
+        font-size: 40px;
+    }
+
+    span input{
+        width: 80%;
+    }
+
+    .content-nav p{
+        margin: 0 20px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    footer{
+        display: flex;
+        flex-direction: column-reverse;
+        
+    }
+
+    footer p{
+        margin: 0px 0px 5px -160px;
+        align-self: center;
+        
+    }
 }
