@@ -1,0 +1,43 @@
+@media screen and (max-width: 428px) {
+    
+    .header-title{
+        margin: auto;
+    }
+
+    .header-nav{
+        display: none;
+    }
+
+    .mobile-menu{
+        display:flex;
+        flex-direction: column;
+        justify-content: end;
+        margin: 180px -40px 0px -77px;
+        padding: 20px 20px 20px 10px;
+        background-color: var(--Dark-Blue);
+        row-gap: 10px;
+        z-index: 1;
+        
+    }
+   
+   
+   
+    .card-container{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+
+
+    footer{
+        display: flex;
+        flex-direction: column-reverse;
+        
+    }
+
+    footer p{
+        margin: 0px 0px 5px -160px;
+        align-self: center;
+        
+    }
+}
