@@ -23,8 +23,7 @@ const setBookCard = (bookData) => {
             if(!bookData.items[i].volumeInfo.title){
                 bookTitle[i].innerText = "Information Unavailable"
             }else if(!bookData.items[i].volumeInfo.imageLinks.thumbnail){
-                bookImg[i].setAttribute("src", "https://media.istockphoto.com/id/1342278794/vector/error-icon-in-the-form-of-pixel-graphics-error-means-that-this-site-is-unavailable-cant-be.jpg?s=612x612&w=0&k=20&c=OAAYswfa8cZ2WfiCKDKRO2MHNkfGAJ4QWVYt2SoRA6k=");
-            }else if(!bookData.items[i].volumeInfo.authors){
+                bookImg[i].setAttribute("src", "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg")
                 bookAuthor[i].innerHTML = `Author: <span>Information Unavailable</span>`;
             }else if(!bookData.items[i].volumeInfo.publishedDate){
                 bookDate[i].innerHTML = `Published Date: <span>Information Unavailable</span>`;
@@ -63,7 +62,12 @@ bookButton.addEventListener("click", ()=>{
     setBookCard();
 })
 
-
+window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    currentId = urlParams.get("id");
+    bookSearch.value = currentId;
+    makeBookRequest();
+};
 
 //hamburger menu
 
