@@ -1,12 +1,5 @@
-//hamburger menu
-
-const menuIcon = document.querySelector("#menu-icon");
-
-const openMenu = () => {
-    const headerNav = document.querySelector(".header-nav");
-    headerNav.classList.toggle("mobile-menu");
-
-}
+import { menuIcon, openMenu } from "./navigation_module.js";
+import { bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, setBookCard, makeBookRequest} from "./searching_module.js";
 
 menuIcon.onclick = openMenu;
 

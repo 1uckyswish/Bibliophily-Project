@@ -34,6 +34,10 @@ header{
     height: 80px;
 }
 
+header a {
+    color: var(--White-Text)
+}
+
 .header-title{
     display: flex;
     gap: 3px;
@@ -63,6 +67,8 @@ header{
     display: flex;
     flex-direction: column;
     margin-top: 100px;
+    height: calc(100vh - 160px);
+    
 }
 
 .content-nav{
@@ -111,7 +117,7 @@ span img{
     align-self: flex-end;
     width: 300px;
     height: 300px;
-    margin-top: -70px;
+    /* margin-top: -70px; */
     margin-right: 40px;
 
 }
