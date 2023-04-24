@@ -45,6 +45,7 @@ const makeBookRequest = () => {
     //Depending of the users input value the query for api link will be updated every time
     const query = bookSearch.value;
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`;
+    if (query !== ""){
     fetch(url)
     .then(result => result.json())
     .then(bookData => {
@@ -54,6 +55,10 @@ const makeBookRequest = () => {
 })
 // if errors it'll return the issues
 .catch(error => console.log(error));
+}
+else {
+    alert("Blank search box")
+}
 };
 
 // if the user click the search button it will generate a new book search
