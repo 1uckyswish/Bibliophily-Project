@@ -11,6 +11,6 @@ window.onload = function () {
     let currentId = urlParams.get("id");
     let bookDetailID = currentId;
     getBookDetails(bookDetailID);
-    displayBookDetails(bookDetailData);
+    displayBookDetails();
 };
 

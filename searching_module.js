@@ -95,14 +95,31 @@ const getBookDetails = (bookDetailID) => {
 
 // 
 const displayBookDetails = (bookDetailData) => {
-    bookDetailImg.setAttribute("src", bookDetailData.volumeInfo.imageLinks.medium);
-    bookDetailAuthor.innerHTML = bookDetailData.volumeInfo.authors;
+
+    // bookDetailImg.setAttribute("src", bookDetailData.volumeInfo.imageLinks.medium);
+    bookDetailAuthor.innerHTML = `by ${bookDetailData.volumeInfo.authors}`;
     bookDetailTitle.innerHTML = bookDetailData.volumeInfo.title;
     bookDetailSummary.innerHTML = bookDetailData.volumeInfo.description;
 
     sampleButton.setAttribute("href", bookDetailData.volumeInfo.previewLink);
     purchaseButton.setAttribute("href", bookDetailData.saleInfo.buyLink)
+
+    console.log(bookDetailData.volumeInfo.imageLinks);
+    let actualImageLink;
+    const availableImageObj = bookDetailData.volumeInfo.imageLinks;
+    if (availableImageObj.hasOwnProperty("medium")) {
+        actualImageLink = bookDetailData.volumeInfo.imageLinks.medium
+    } else if (availableImageObj.hasOwnProperty("small")) {
+        actualImageLink = bookDetailData.volumeInfo.imageLinks.small
+    } else if (availableImageObj.hasOwnProperty("smallThumbnail")) {
+        actualImageLink = bookDetailData.volumeINfo.imageLinks.smallThumbnail
+    } else {
+        actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
+    }
+    console.log(actualImageLink);
+    bookDetailImg.setAttribute("src", actualImageLink);
 }
+
 
 // // if the user click the search button it will generate a new book search
 // bookButton.addEventListener("click", ()=>{
