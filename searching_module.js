@@ -9,6 +9,8 @@ const bookImg = document.querySelectorAll(".card-img img");
 const bookButton = document.querySelector(".content-nav img");
 const bookCard = document.querySelectorAll(".card");
 const bookDetailButton = document.querySelectorAll(".bookDetailBtn");
+const cardContainer = document.querySelector(".card-container");
+const quote = document.querySelector(".content-nav p");
 
 const bookDetailImg = document.querySelector("#book-detail-img");
 const bookDetailAuthor = document.querySelector("#book-detail-author");
@@ -26,35 +28,62 @@ const apiKey = "AIzaSyBkVNpp07djnpcl_ueGOP6467hRX04BPAk";
 
 //a function to set all of the empty elements and fill in the book data.
 const setBookCard = (bookData) => {
-    // a loop to append the data for each one. Doing 6 due to there only being 6 cards within html
-    //if no book is found return an alert
-    if(!bookData.items){
-        alert("Sorry No Books Found");
-    }else{
-        for(let i = 0; i < 6; i++){
-            //if information for the following not available return a placement holder
-            if(!bookData.items[i].volumeInfo.title){
-                bookTitle[i].innerText = "Information Unavailable"
-            }else if(!bookData.items[i].volumeInfo.imageLinks.thumbnail){
-                bookImg[i].setAttribute("src", "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg")
-                bookAuthor[i].innerHTML = `Author: <span>Information Unavailable</span>`;
-            }else if(!bookData.items[i].volumeInfo.publishedDate){
-                bookDate[i].innerHTML = `Published Date: <span>Information Unavailable</span>`;
-            }else if(!bookData.items[i].volumeInfo.publisher){
-                bookPublish[i].innerHTML = `Publisher: <span>Information Unavailable</span>`
-            }else{
-                // if information is found then display it
-                bookCard[i].setAttribute("id", bookData.items[i].id);
-                bookTitle[i].innerText = bookData.items[i].volumeInfo.title;
-                bookImg[i].setAttribute("src", bookData.items[i].volumeInfo.imageLinks.thumbnail);
-                bookAuthor[i].innerHTML = `Author: <span>${bookData.items[i].volumeInfo.authors}</span>`;
-                bookDate[i].innerHTML = `Published Date: <span>${bookData.items[i].volumeInfo.publishedDate}</span>`;
-                bookPublish[i].innerHTML = `Publisher: <span>${bookData.items[i].volumeInfo.publisher}</span>`;
-                bookDetailButton[i].setAttribute("href", `./details.html?id=${bookData.items[i].id}`);
-            }
-        }
+    // If no book is found, return an alert
+    if (bookData.items === "") {
+      quote.innerText = "Sorry No Books found";
+      return;
     }
-};
+  
+    // Use a template string for the quote text
+    quote.innerText = "Your Next Read is a click away";
+  
+    // Use a constant for the maximum number of books to show
+    const maxResults = 9;
+  
+    // Use Array.from() to create an array from the book items
+    const books = Array.from(bookData.items);
+  
+    // Create a function to generate the HTML for a book card
+    const createBookCardHtml = (book) => {
+      // Use destructuring to get the volumeInfo properties
+      const {
+        title = "Not Available",
+        authors = "Not Available",
+        publishedDate = "Not Available",
+        publisher = "Not Available",
+        imageLinks: { thumbnail } = {},
+      } = book.volumeInfo;
+  
+      // Use a template string to generate the HTML for the card
+      return `
+        <div class="card">
+          <div class="card-img">
+            <img src="${thumbnail || "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"}">
+          </div>
+          <div class="card-details">
+            <h3 class="book-title">${title}</h3>
+            <P class="author"> Author: <span>${authors}</span></P>
+            <p class="date"> Published Date: <span>${publishedDate}</span></p>
+            <p class="publisher">Publisher: <span>${publisher}</span></p>
+            <a href="./details.html"><button>See More ›</button></a>
+          </div>
+        </div>
+      `;
+    };
+  
+    // Use Array.slice() to limit the number of books
+    const limitedBooks = books.slice(0, maxResults);
+  
+    // Use Array.map() to generate the HTML for each book card
+    const bookCardsHtml = limitedBooks.map(createBookCardHtml);
+  
+    // Use Array.join() to concatenate the HTML for all the book cards
+    const allBookCardsHtml = bookCardsHtml.join("");
+  
+    // Set the innerHTML of the card container to the HTML for all the book cards
+    cardContainer.innerHTML = allBookCardsHtml;
+  };
+
 
 const makeBookRequest = () => {
     //Depending of the users input value the query for api link will be updated every time
@@ -121,11 +150,11 @@ const displayBookDetails = (bookDetailData) => {
 }
 
 
-// // if the user click the search button it will generate a new book search
-// bookButton.addEventListener("click", ()=>{
-//     makeBookRequest();
-//     // setBookCard();
-// })
+// if the user click the search button it will generate a new book search
+bookButton.addEventListener("click", ()=>{
+    makeBookRequest();
+    // setBookCard();
+})
 
 
 export  {bookSearch, bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, bookDetailData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails}
