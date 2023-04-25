@@ -28,7 +28,7 @@ const apiKey = "AIzaSyBkVNpp07djnpcl_ueGOP6467hRX04BPAk";
 const setBookCard = (bookData) => {
     // a loop to append the data for each one. Doing 6 due to there only being 6 cards within html
     //if no book is found return an alert
-    if(!bookData.items){
+    if(typeof(bookData.items) == "undefined"){
         alert("Sorry No Books Found");
     }else{
         for(let i = 0; i < 6; i++){
@@ -121,11 +121,11 @@ const displayBookDetails = (bookDetailData) => {
 }
 
 
-// // if the user click the search button it will generate a new book search
-// bookButton.addEventListener("click", ()=>{
-//     makeBookRequest();
-//     // setBookCard();
-// })
+// if the user click the search button it will generate a new book search
+bookButton.addEventListener("click", ()=>{
+    makeBookRequest();
+    setBookCard();
+})
 
 
 export  {bookSearch, bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, bookDetailData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails}
