@@ -13,7 +13,7 @@ body{
 
 .card-container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,minmax(300px,1fr));
     gap: 40px;
     margin: 10px;
     padding: 10px;
@@ -29,13 +29,21 @@ body{
     height: auto;
     width: auto;
     align-items: center;
+    background-color: #c8c7c7;
     /* border: 2px solid purple; */
 }
 
+.card-img{
+    height: 100%;
+}
+
 .card-img img{
-    width: 152px;
-    height: 224px;
+    width: 200px;
+    height: 100%;
     border-radius: 10px;
+    
+    
+    
 }
 
 
@@ -51,6 +59,7 @@ body{
 }
 
 .card-details{
+    align-self: start;
     font-family: 'Sedan SC';
     font-style: normal;
     font-weight: 400;
@@ -94,11 +103,32 @@ body{
 @media screen and (max-width: 768px) {
     .card-container{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,minmax(300px,1fr));
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: -50px;
     }
 
+    .card{
+        width: 100%;
+        height: 300px;
+    }
 
+    .card-img img{
+        width: 150px;
 
+    }
+
+    .card-details{
+        row-gap: 8px;
+        height: 100%;
+        text-align: start;
+        padding: 5px;
+    }
+
+    .card-details button{
+        width: 85%;
+    }
 }
 
 @media screen and (max-width: 428px) {
@@ -125,9 +155,18 @@ body{
    
    
    
-    .card-container{
+    /**.card-container{
         display: grid;
         grid-template-columns: 1fr;
+    }**/
+
+    .card-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card{
+        height: 250px;
     }
 
 
