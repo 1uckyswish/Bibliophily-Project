@@ -150,11 +150,19 @@ const displayBookDetails = (bookDetailData) => {
 }
 
 
+<<<<<<< Updated upstream
 // if the user click the search button it will generate a new book search
 bookButton.addEventListener("click", ()=>{
     makeBookRequest();
     // setBookCard();
 })
+=======
+// // if the user click the search button it will generate a new book search
+// bookButton.addEventListener("click", ()=>{
+//     makeBookRequest();
+//     // setBookCard();
+// })
+>>>>>>> Stashed changes
 
 
 export  {bookSearch, bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, bookDetailData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails}
