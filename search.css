@@ -2,6 +2,9 @@ body{
     background-color: #DCE1E3;
 }
 
+span img{
+    margin-bottom: 4.5px;
+}
 .content-nav img{
     cursor: pointer;
 }

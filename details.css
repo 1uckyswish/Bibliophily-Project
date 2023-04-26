@@ -1,25 +1,46 @@
-h2 {
+body{
+    background-color:var(--Background-color) ;
+}
+
+h2, h3 {
     font-size: 36px;
     color: #591C0B;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h2{
+    margin-top: 80px;
 }
 
 .book-container {
+    background-color:var(--White-Text);
     display: flex;
-    margin: 0 80px  0 80px;
+    border-radius: 50px;
+    padding: 60px;
+    margin: 0 80px  50px 80px;
 }
 
 #book-details-left {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     width: 50%;
-    margin-right: 20px;
+    margin-right: 30px;
+}
+
+#book-detail-author{
+    font-size: 25px;
 }
 
 #book-details-right {
+    background-color: ;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 50%;
+    justify-content: start;
     align-items: center;
     margin-left: 20px;
     padding-bottom: 100px;
@@ -32,13 +53,16 @@ h2 {
 
 #book-detail-img {
     border: 1px solid black;
-    max-width: 95%;
+    width: 80%;
+    height: 75%;
 }
 
 #book-detail-summary {
+    width: 80%;
     background-color: #ADAFAB;
     border-radius: 25px;
     padding: 25px;
+    margin-top: 30px;
 }
 
 #buttons-container {
@@ -47,16 +71,87 @@ h2 {
     margin: 20px 80px 20px 80px;
 }
 
+#buttons-container button{
+    width: 250px;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--Dark-Blue);
+    color: var(--White-Text);
+    font-size: 18px;
+    letter-spacing: 3px;
+
+}
+
 #related-books-container {
-    background-color: #ADAFAB
+    background-color: #ADAFAB;
+    width: 88%;
+    align-self: center;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 40px;
+    border-radius: 30px;
+    
+    
 }
 
-.related-book-card {
-    /* placeholder color just for visibility during styling */
+#related-books-container img{
+    height: 100%;
+    width: 200px;
+    max-width: 100%;
+    padding: 10px;
+
+}
+/**.related-book-card {
+ placeholder color just for visibility during styling *
     background-color: orange;
+    height: ;
+} **/
+
+
+/** media query tablet**/
+@media (max-width: 768px){
+
+    .book-container{
+        width: 80%;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: -40px;
+    }
+
+    #book-details-left{
+        justify-content: center;
+        margin: auto;
+    }
+
+    #book-detail-img{
+        height: 50%;
+        width: 100%;
+        
+    }
+
+    #book-details-right{
+        width: 100%;
+        margin-top: 50px;
+        margin-left: -10px;
+        justify-content: center;
+    }
+
+    h2{
+        margin-bottom: -20px;
+    }
+
+    #book-detail-summary{
+        width: 95%;
+        margin-bottom: -100px;
+    }
+
+
+
 }
-
-
 
 
 @media screen and (max-width: 428px) {
@@ -80,13 +175,42 @@ h2 {
         z-index: 1;
         
     }
-   
-   
-   
-    .card-container{
-        display: grid;
-        grid-template-columns: 1fr;
+
+    .book-container{
+        border-radius: 20px;
     }
+
+    #book-details-left{
+        width: 100%;
+    }
+
+
+    #book-details-right{
+        width: 130%;
+    }
+    
+    #book-detail-summary{
+        width: 100%;
+        
+    }
+   
+    #buttons-container{
+        width: 90%;
+        align-self: center;
+    }
+
+    #buttons-container button{
+        width: 100%;
+        letter-spacing: 2px;
+        padding: 10px;
+        border-radius: 40px;
+    }
+    
+
+    #related-books-container{
+        border-radius: 10px;
+    }
+    
 
     footer{
         display: flex;
