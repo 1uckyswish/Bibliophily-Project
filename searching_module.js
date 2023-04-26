@@ -24,37 +24,60 @@ let bookDetailData;
 // api key that will be used with Template literals
 const apiKey = "AIzaSyBkVNpp07djnpcl_ueGOP6467hRX04BPAk";
 
-//a function to set all of the empty elements and fill in the book data.
+// This function sets the content of book cards based on book data received from an API
 const setBookCard = (bookData) => {
-    // a loop to append the data for each one. Doing 6 due to there only being 6 cards within html
-    //if no book is found return an alert
-    if(typeof(bookData.items) == "undefined"){
-        alert("Sorry No Books Found");
-    }else{
-        for(let i = 0; i < 6; i++){
-            //if information for the following not available return a placement holder
-            if(!bookData.items[i].volumeInfo.title){
-                bookTitle[i].innerText = "Information Unavailable"
-            }else if(!bookData.items[i].volumeInfo.imageLinks.thumbnail){
-                bookImg[i].setAttribute("src", "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg")
-                bookAuthor[i].innerHTML = `Author: <span>Information Unavailable</span>`;
-            }else if(!bookData.items[i].volumeInfo.publishedDate){
-                bookDate[i].innerHTML = `Published Date: <span>Information Unavailable</span>`;
-            }else if(!bookData.items[i].volumeInfo.publisher){
-                bookPublish[i].innerHTML = `Publisher: <span>Information Unavailable</span>`
-            }else{
-                // if information is found then display it
-                bookCard[i].setAttribute("id", bookData.items[i].id);
-                bookTitle[i].innerText = bookData.items[i].volumeInfo.title;
-                bookImg[i].setAttribute("src", bookData.items[i].volumeInfo.imageLinks.thumbnail);
-                bookAuthor[i].innerHTML = `Author: <span>${bookData.items[i].volumeInfo.authors}</span>`;
-                bookDate[i].innerHTML = `Published Date: <span>${bookData.items[i].volumeInfo.publishedDate}</span>`;
-                bookPublish[i].innerHTML = `Publisher: <span>${bookData.items[i].volumeInfo.publisher}</span>`;
-                bookDetailButton[i].setAttribute("href", `./details.html?id=${bookData.items[i].id}`);
-            }
+    // Get the number of books to display (minimum of 6 or total number of books)
+    const bookCount = Math.min(bookData.items.length, 6);
+  
+    // Loop through each book and set its content
+    for (let i = 0; i < bookCount; i++) {
+        // Get the book information and volume information for the current book
+        const item = bookData.items[i];
+        const volumeInfo = item.volumeInfo;
+  
+        // Set the book title, display "Information Unavailable" if no title is available
+        if (!volumeInfo.title) {
+            bookTitle[i].innerText = "Information Unavailable";
+        } else {
+            bookTitle[i].innerText = volumeInfo.title;
         }
+  
+        // Set the book image, display default image and "Information Unavailable" for author if no image link is available
+        if (volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+            bookImg[i].setAttribute("src", volumeInfo.imageLinks.thumbnail);
+        } else {
+            bookImg[i].setAttribute("src", "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg");
+            bookAuthor[i].innerHTML = `Author: <span>Information Unavailable</span>`;
+        }
+  
+        // Set the book published date, display "Information Unavailable" if no published date is available
+        if (volumeInfo.publishedDate) {
+            bookDate[i].innerHTML = `Published Date: <span>${volumeInfo.publishedDate}</span>`;
+        } else {
+            bookDate[i].innerHTML = `Published Date: <span>Information Unavailable</span>`;
+        }
+  
+        // Set the book publisher, display "Information Unavailable" if no publisher is available
+        if (volumeInfo.publisher) {
+            bookPublish[i].innerHTML = `Publisher: <span>${volumeInfo.publisher}</span>`;
+        } else {
+            bookPublish[i].innerHTML = `Publisher: <span>Information Unavailable</span>`;
+        }
+  
+        // Set the book ID and author, display "Information Unavailable" if no author is available
+        bookCard[i].setAttribute("id", item.id);
+        bookAuthor[i].innerHTML = `Author: <span>${volumeInfo.authors || "Information Unavailable"}</span>`;
+        
+        // Set the book detail button link
+        bookDetailButton[i].setAttribute("href", `./details.html?id=${item.id}`);
+    }
+  
+    // Display an alert if no books were found
+    if (!bookData.items || bookData.items.length === 0) {
+        alert("Sorry No Books Found");
     }
 };
+
 
 const makeBookRequest = () => {
     //Depending of the users input value the query for api link will be updated every time
