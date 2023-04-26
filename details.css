@@ -47,6 +47,15 @@ h2 {
     margin: 20px 80px 20px 80px;
 }
 
+#related-books-container {
+    background-color: #ADAFAB
+}
+
+.related-book-card {
+    /* placeholder color just for visibility during styling */
+    background-color: orange;
+}
+
 
 
 

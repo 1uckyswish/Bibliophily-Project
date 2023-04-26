@@ -1,5 +1,5 @@
 import { menuIcon, openMenu } from "./navigation_module.js"
-import {displayBookDetails,getBookDetails, bookDetailData} from "./searching_module.js"
+import {displayBookDetails,getBookDetails,bookDetailData} from "./searching_module.js"
 
 
 menuIcon.onclick = openMenu;
@@ -11,6 +11,6 @@ window.onload = function () {
     let currentId = urlParams.get("id");
     let bookDetailID = currentId;
     getBookDetails(bookDetailID);
-    displayBookDetails();
+    displayBookDetails(bookDetailData);
 };
 

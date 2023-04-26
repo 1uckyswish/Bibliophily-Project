@@ -10,13 +10,9 @@ window.onload = function () {
     makeBookRequest();
 };
 
-// if the user click the search button it will generate a new book search
-bookButton.addEventListener("click", ()=>{
-    makeBookRequest();
-    // setBookCard();
-})
-
 menuIcon.onclick = openMenu;
+
+
 
 
 

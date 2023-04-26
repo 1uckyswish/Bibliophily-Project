@@ -104,6 +104,8 @@ else {
 
 
 
+
+
 // 
 const getBookDetails = (bookDetailID) => {
     const url = `https://www.googleapis.com/books/v1/volumes/${bookDetailID}`;
@@ -144,11 +146,13 @@ const displayBookDetails = (bookDetailData) => {
 }
 
 
-// if the user click the search button it will generate a new book search
-bookButton.addEventListener("click", ()=>{
-    makeBookRequest();
-    setBookCard();
-})
+// // if the user click the search button it will generate a new book search
+// const bookButtonEvent = bookButton.addEventListener("click", ()=>{
+//     makeBookRequest();
+// })
+
+
+
 
 
 export  {bookSearch, bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, bookDetailData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails}
