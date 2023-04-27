@@ -110,6 +110,12 @@ span img{
     height: 50px;
     margin-left: -45px;
     margin-top: 4.5px;
+    transition: 0.60s;
+    
+}
+
+span img:hover{
+    transform: scale(0.9);
 }
 
 #searchImg{

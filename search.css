@@ -74,7 +74,7 @@ span img{
     flex-direction: column;
     gap: 15px;
     margin-left: 10px;
-    width: auto;
+    width: 100%;
     height: auto;
 }
 
@@ -84,13 +84,18 @@ span img{
     font-weight: 400;
     font-size: 20px;
     line-height: 28px;
-    width: 172px;
+    width: 90%;
     height: 33px;
     border: none;
     background: #004E7C;
     border-radius: 20px;
     color: #FFFFFF;
     cursor: pointer;
+    transition: 0.60s;
+}
+
+.card-details button:hover{
+    transform: scale(0.9);
 }
 
 .card-details span{

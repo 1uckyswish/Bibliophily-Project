@@ -36,7 +36,6 @@ h2{
 }
 
 #book-details-right {
-    background-color: ;
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -80,6 +79,12 @@ h2{
     color: var(--White-Text);
     font-size: 18px;
     letter-spacing: 3px;
+    transition: 0.6s;
+
+}
+
+#buttons-container button:hover{
+    transform: scale(0.9);
 
 }
 
