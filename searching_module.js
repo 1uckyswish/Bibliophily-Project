@@ -8,8 +8,8 @@ const bookPublish = document.querySelectorAll(".publisher");
 const bookImg = document.querySelectorAll(".card-img img"); 
 const bookButton = document.querySelector(".content-nav img");
 const bookCard = document.querySelectorAll(".card");
-const bookDetailButton = document.querySelectorAll(".bookDetailBtn");
 
+const bookDetailButton = document.querySelectorAll(".bookDetailBtn");
 const bookDetailImg = document.querySelector("#book-detail-img");
 const bookDetailAuthor = document.querySelector("#book-detail-author");
 const bookDetailTitle = document.querySelector("#book-detail-title");
@@ -17,9 +17,16 @@ const bookDetailSummary = document.querySelector("#book-detail-summary");
 const sampleButton = document.querySelector("#sample-button");
 const purchaseButton = document.querySelector("#purchase-button");
 
-// let bookDataG;
-let bookDetailId;
+const relatedBookCards = document.querySelectorAll(".related-book-card");
+const relatedBookImgs = document.querySelectorAll(".related-book-img");
+
+let bookData;
 let bookDetailData;
+let fiveRelatedBooks;
+
+
+
+
 
 // api key that will be used with Template literals
 const apiKey = "AIzaSyBkVNpp07djnpcl_ueGOP6467hRX04BPAk";
@@ -79,22 +86,54 @@ const setBookCard = (bookData) => {
 };
 
 
-const makeBookRequest = () => {
+
+// const makeBookRequestOld = () => {
+//     //Depending of the users input value the query for api link will be updated every time
+//     const query = bookSearch.value;
+//     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`;
+//     //Check if search box is empty
+//     if (query !== ""){
+//     fetch(url)
+//     .then(result => result.json())
+//     .then(bookData => {
+
+//        // apply the JSON value to access the data and apply to the function
+//     setBookCard(bookData)
+
+//     // console.log(bookData);
+//     topSix = bookData.items.filter((book,index) => index < 6);
+//     // console.log(topSix);
+//     // let bookDetailID = "qPrLY-LYPlwC";
+//     // fiveRelatedBooks = topSix.filter((book,id) => book.id != bookDetailID);
+//     // console.log(fiveRelatedBooks);
+ 
+//     })
+
+// // if errors it'll return the issues
+// .catch(error => console.log(error));
+// }
+// //behavior if search box is empty, TBD
+// else {
+//     alert("Blank search box")
+// }
+
+// };
+
+const makeBookRequest = async (bookSearch) => {
     //Depending of the users input value the query for api link will be updated every time
     const query = bookSearch.value;
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`;
     //Check if search box is empty
     if (query !== ""){
-    fetch(url)
-    .then(result => result.json())
-    .then(bookData => {
-        console.log(bookData);
-       // apply the JSON value to access the data and apply to the function
-    setBookCard(bookData);
-    // bookDataG = bookData;
-    })
-// if errors it'll return the issues
-.catch(error => console.log(error));
+         try {
+            const result = await fetch(url);
+            const json = await result.json();
+            // const bookData = json.items.filter((book,index) => index < 6);
+            setBookCard(json);
+        }
+        catch (error) {
+            console.log(error);
+        }
 }
 //behavior if search box is empty, TBD
 else {
@@ -103,25 +142,21 @@ else {
 };
 
 
-
-
-
 // 
 const getBookDetails = (bookDetailID) => {
     const url = `https://www.googleapis.com/books/v1/volumes/${bookDetailID}`;
     fetch(url)
     .then(resultD => resultD.json())
     .then(bookDetailData => {
-        console.log(bookDetailData)
-    displayBookDetails(bookDetailData)
+        displayBookDetails(bookDetailData)
+        
     })
     .catch(error => console.log(error));
 }
 
 // 
 const displayBookDetails = (bookDetailData) => {
-
-    // bookDetailImg.setAttribute("src", bookDetailData.volumeInfo.imageLinks.medium);
+    
     bookDetailAuthor.innerHTML = `by ${bookDetailData.volumeInfo.authors}`;
     bookDetailTitle.innerHTML = bookDetailData.volumeInfo.title;
     bookDetailSummary.innerHTML = bookDetailData.volumeInfo.description;
@@ -129,7 +164,7 @@ const displayBookDetails = (bookDetailData) => {
     sampleButton.setAttribute("href", bookDetailData.volumeInfo.previewLink);
     purchaseButton.setAttribute("href", bookDetailData.saleInfo.buyLink)
 
-    console.log(bookDetailData.volumeInfo.imageLinks);
+    
     let actualImageLink;
     const availableImageObj = bookDetailData.volumeInfo.imageLinks;
     if (availableImageObj.hasOwnProperty("medium")) {
@@ -137,22 +172,34 @@ const displayBookDetails = (bookDetailData) => {
     } else if (availableImageObj.hasOwnProperty("small")) {
         actualImageLink = bookDetailData.volumeInfo.imageLinks.small
     } else if (availableImageObj.hasOwnProperty("smallThumbnail")) {
-        actualImageLink = bookDetailData.volumeINfo.imageLinks.smallThumbnail
+        actualImageLink = bookDetailData.volumeInfo.imageLinks.smallThumbnail
     } else {
         actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
     }
-    console.log(actualImageLink);
+    
     bookDetailImg.setAttribute("src", actualImageLink);
 }
 
+//filter to only related books
+const getRelatedBooks = {
 
-// // if the user click the search button it will generate a new book search
-// const bookButtonEvent = bookButton.addEventListener("click", ()=>{
-//     makeBookRequest();
-// })
+//     fiveRelatedBooks = fullResult.filter((book,id) => book.id != bookDetailID)
+//    displayRelatedBooks(fiveRelatedBooks);
+
+}
+
+//displayed related books 
+const displayRelatedBooks = () => {
+
+    for (let i = 0; i < fiveRelatedBooks.length; i++) {
+        relatedBookCards[i].setAttribute("id", fiveRelatedBooks[i].id);
+        relatedBookCards[i].setAttribute("href", `./details.html?=${fiveRelatedBooks[i].id}`);
+        relatedBookImgs[i].setAttribute("src", fiveRelatedBooks[i].volumeInfo.imageLinks.smallThumbnail);
+    }
+
+}
 
 
 
 
-
-export  {bookSearch, bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, bookDetailData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails}
+export  {bookSearch, bookButton, bookDetailData, bookData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails, getRelatedBooks};
