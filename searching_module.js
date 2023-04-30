@@ -150,9 +150,11 @@ const displayBookDetails = (bookDetailData) => {
     //related-search-terms
     const auth = bookDetailData.volumeInfo.authors
     const cats = bookDetailData.volumeInfo.categories
-    // const relatedCount = auth.length + cats.length;
+    const title = bookDetailData.volumeInfo.title;
+    const publisher = bookDetailData.volumeInfo.publisher;
     const relSearchTerms = [];
-    if (auth.length + cats.length <= 5) {
+    
+    
         //relatedSearchTerm Array buildout
             for (let i=0; i < auth.length; i++) {
                 relSearchTerms.push(auth[i])
@@ -160,14 +162,19 @@ const displayBookDetails = (bookDetailData) => {
             for (let i=0; i < cats.length; i++) {
                 relSearchTerms.push(cats[i])
             }
-
-        }
+            if (title != "Undefined") {
+                relSearchTerms.push(title)
+            }
+            if (publisher != "Undefined") {
+                relSearchTerms.push(publisher)
+            }
+            
     console.log(relSearchTerms);
 
-    for (let i=0; i < relatedSearchCard.length;i++) {
-  relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i]}`);
-  relatedSearchCard[i].innerHTML = relSearchTerms[i];
-  relatedSearchCard[i].setAttribute("id",relSearchTerms[i]);
+    for (let i=0; i < 5 ;i++) {
+  relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i].replace("&","/")}`);
+  relatedSearchCard[i].innerHTML = relSearchTerms[i].replace("&","/");
+  relatedSearchCard[i].setAttribute("id",relSearchTerms[i].replace("&","/"));
     }
 }
 
