@@ -109,7 +109,7 @@ h2{
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .related-search-card {
@@ -218,8 +218,10 @@ h2{
     }
     
 
-    #related-books-container{
+    .related-search-container{
         border-radius: 10px;
+        flex-direction: column;
+        align-items: center;
     }
     
 

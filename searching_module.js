@@ -10,20 +10,23 @@ const bookButton = document.querySelector(".content-nav img");
 const bookCard = document.querySelectorAll(".card");
 const bookDetailButton = document.querySelectorAll(".bookDetailBtn");
 
+//details variable declarations
 const bookDetailImg = document.querySelector("#book-detail-img");
 const bookDetailAuthor = document.querySelector("#book-detail-author");
 const bookDetailTitle = document.querySelector("#book-detail-title");
 const bookDetailSummary = document.querySelector("#book-detail-summary");
-const sampleButton = document.querySelector("#sample-button");
-const purchaseButton = document.querySelector("#purchase-button");
+const sampleButton = document.querySelector(".sample-button");
+const purchaseButton = document.querySelector(".purchase-button");
+let bookDetailId;
+let bookDetailData;
 
+//related sesarch variable declarations
 const relatedSearchCard = document.querySelectorAll(".related-search-card");
 const relatedSearchContainer = document.querySelector(".related-search-container");
 const relatedSearchHeader = document.querySelector(".related-search-header");
 
-// let bookDataG;
-let bookDetailId;
-let bookDetailData;
+
+
 
 // api key that will be used with Template literals
 const apiKey = "AIzaSyBkVNpp07djnpcl_ueGOP6467hRX04BPAk";
@@ -92,7 +95,6 @@ const makeBookRequest = () => {
     fetch(url)
     .then(result => result.json())
     .then(bookData => {
-        console.log(bookData);
        // apply the JSON value to access the data and apply to the function
     setBookCard(bookData);
     // bookDataG = bookData;
@@ -110,34 +112,67 @@ else {
 
 
 
-// 
+//function to call the google books API and convert the result to json
 const getBookDetails = (bookDetailID) => {
     const url = `https://www.googleapis.com/books/v1/volumes/${bookDetailID}`;
     fetch(url)
     .then(resultD => resultD.json())
     .then(bookDetailData => {
-        console.log(bookDetailData)
+    //once the result is obtained, call the displayBookDetails function with this result as parameter
     displayBookDetails(bookDetailData)
     })
     .catch(error => console.log(error));
 }
 
-// 
+//second function for actually displaying book detail data retrieved with getBookDetails 
 const displayBookDetails = (bookDetailData) => {
+let bdAuthor;
+let bdTitle;
+let bdSummary;
 
-    // bookDetailImg.setAttribute("src", bookDetailData.volumeInfo.imageLinks.medium);
-    bookDetailAuthor.innerHTML = `by ${bookDetailData.volumeInfo.authors}`;
-    bookDetailTitle.innerHTML = bookDetailData.volumeInfo.title;
-    bookDetailSummary.innerHTML = bookDetailData.volumeInfo.description;
+    //insert values into elements
+    if (typeof bookDetailData.volumeInfo.authors != "undefined") {
+    bdAuthor = `by ${bookDetailData.volumeInfo.authors}`;
+    } else {
+        bdAuthor = "by Unknown Author"
+    }
+    bookDetailAuthor.innerHTML = bdAuthor;
 
+    if (typeof bookDetailData.volumeInfo.title != "undefined") {
+    bdTitle = bookDetailData.volumeInfo.title;
+    } else {
+        bdTitle = "Unknown Title";
+    }
+    bookDetailTitle.innerHTML = bdTitle;
+    
+    if (typeof bookDetailData.volumeInfo.description != "undefined") {
+    bdSummary = bookDetailData.volumeInfo.description;
+    } else {
+        bdSummary = "No summary available."
+    }
+    bookDetailSummary.innerHTML = bdSummary;
+    
+
+    //create and attach the links as functionality for the buttons
+    if (typeof bookDetailData.volumeInfo.previewLink != "undefined") {
     sampleButton.setAttribute("href", bookDetailData.volumeInfo.previewLink);
-    purchaseButton.setAttribute("href", bookDetailData.saleInfo.buyLink)
+    } else {
+        //turn off sample button
+        sampleButton.classList.toggle("hidden");
+    }
+    if (typeof bookDetailData.saleInfo.buyLink != "undefined") {
+    purchaseButton.setAttribute("href", bookDetailData.saleInfo.buyLink);
+    } else {
+        //turn off purchase button
+        purchaseButton.classList.toggle("hidden");
+    }
 
-    // console.log(bookDetailData.volumeInfo.imageLinks);
+    //discover an available image link, and use default if none exists
     let actualImageLink;
     if (typeof bookDetailData.volumeInfo.imageLinks !== "undefined") {
-    let availableImageObj = bookDetailData.volumeInfo.imageLinks;
-    
+        //pull all available images array
+        let availableImageObj = bookDetailData.volumeInfo.imageLinks;
+        //loop through possible images to find one that exists, largest to smallest
         if (availableImageObj.hasOwnProperty("medium")) {
             actualImageLink = bookDetailData.volumeInfo.imageLinks.medium
         } else if (availableImageObj.hasOwnProperty("small")) {
@@ -145,16 +180,19 @@ const displayBookDetails = (bookDetailData) => {
         } else if (availableImageObj.hasOwnProperty("smallThumbnail")) {
             actualImageLink = bookDetailData.volumeInfo.imageLinks.smallThumbnail
         } else {
+            //default image assignment for if no image larger than smallThumbnail is available
             actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
         } } else {
+            //default image assignment for if imageLinks doesn't exist on the book at all
             actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
         }
     
-    console.log(actualImageLink);
+    //set image source from result of previous code
+    
     bookDetailImg.setAttribute("src", actualImageLink);
     
 
-    //related-search-terms
+    // additional related-search-terms variable declarations
     const auth = bookDetailData.volumeInfo.authors
     const cats = bookDetailData.volumeInfo.categories
     const title = bookDetailData.volumeInfo.title;
@@ -163,11 +201,12 @@ const displayBookDetails = (bookDetailData) => {
     const date = bookDetailData.volumeInfo.publishedDate;
     const language = bookDetailData.volumeInfo.language;
     const relPrintType = bookDetailData.volumeInfo.printType;
-    console.log(relPrintType);
+    
+    //create empty array to store search terms
     const relSearchTerms = [];
     
     
-        //relatedSearchTerm Array buildout
+        //fill that array with all available search terms
         if (bookDetailData.volumeInfo.hasOwnProperty("authors")) {
             for (let i=0; i < auth.length; i++) {
                 relSearchTerms.push(auth[i].replace("&","/"))
@@ -195,30 +234,24 @@ const displayBookDetails = (bookDetailData) => {
             if (relPrintType != "undefined") {
                 relSearchTerms.push(relPrintType.replace("&","/"))
             }
-            
-    console.log(relSearchTerms);
+    //check if at least 1 search term exists for the  book       
+    
     if (relSearchTerms.length > 1) {
-
+           
+    //loop through the search terms and assign to related search cards
     for (let i=0; i < relSearchTerms.length ;i++) {
         if (relSearchTerms[i] != "undefined") {
-  relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i]}`);
-  relatedSearchCard[i].innerHTML = relSearchTerms[i];
-  relatedSearchCard[i].setAttribute("id",relSearchTerms[i]);
-            } else {console.log("Search terms undefined")}
+        relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i]}`);
+        relatedSearchCard[i].innerHTML = relSearchTerms[i];
+        relatedSearchCard[i].setAttribute("id",relSearchTerms[i]);
+            } else {alert("Search terms undefined")}
         } 
     } else {
-        //Class List Stuff
+        // toggle classlist to display None if no search terms exist - will hide whole section
+        document.querySelector(".related-search-container").classList.toggle("hidden");
+        document.querySelector(".related-search-header").classList.toggle("hidden");
     }
 }
 
 
-// // if the user click the search button it will generate a new book search
-// const bookButtonEvent = bookButton.addEventListener("click", ()=>{
-//     makeBookRequest();
-// })
-
-
-
-
-
-export  {bookSearch, bookTitle, bookAuthor, bookDate, bookPublish, bookImg, bookButton, apiKey, bookDetailData, setBookCard, makeBookRequest, getBookDetails, displayBookDetails}
+export  {bookSearch, bookButton, bookDetailData, makeBookRequest, getBookDetails}

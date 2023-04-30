@@ -1,5 +1,5 @@
 import { menuIcon, openMenu } from "./navigation_module.js"
-import {displayBookDetails,getBookDetails,bookDetailData} from "./searching_module.js"
+import {getBookDetails} from "./searching_module.js"
 
 
 menuIcon.onclick = openMenu;
