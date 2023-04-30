@@ -88,7 +88,7 @@ h2{
 
 }
 
-#related-books-container {
+#related-search-container {
     background-color: #ADAFAB;
     width: 88%;
     align-self: center;
@@ -100,18 +100,20 @@ h2{
     
 }
 
-#related-books-container img{
+#related-search-container a{
     height: 100%;
     width: 200px;
     max-width: 100%;
     padding: 10px;
+   
+    
 
 }
-/**.related-book-card {
- placeholder color just for visibility during styling *
-    background-color: orange;
-    height: ;
-} **/
+
+.related-search-card {
+    color: black;
+    text-align: center;
+}
 
 
 /** media query tablet**/

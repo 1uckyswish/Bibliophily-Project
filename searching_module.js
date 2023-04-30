@@ -17,6 +17,8 @@ const bookDetailSummary = document.querySelector("#book-detail-summary");
 const sampleButton = document.querySelector("#sample-button");
 const purchaseButton = document.querySelector("#purchase-button");
 
+const relatedSearchCard = document.querySelectorAll(".related-search-card")
+
 // let bookDataG;
 let bookDetailId;
 let bookDetailData;
@@ -129,7 +131,7 @@ const displayBookDetails = (bookDetailData) => {
     sampleButton.setAttribute("href", bookDetailData.volumeInfo.previewLink);
     purchaseButton.setAttribute("href", bookDetailData.saleInfo.buyLink)
 
-    console.log(bookDetailData.volumeInfo.imageLinks);
+    // console.log(bookDetailData.volumeInfo.imageLinks);
     let actualImageLink;
     const availableImageObj = bookDetailData.volumeInfo.imageLinks;
     if (availableImageObj.hasOwnProperty("medium")) {
@@ -137,12 +139,36 @@ const displayBookDetails = (bookDetailData) => {
     } else if (availableImageObj.hasOwnProperty("small")) {
         actualImageLink = bookDetailData.volumeInfo.imageLinks.small
     } else if (availableImageObj.hasOwnProperty("smallThumbnail")) {
-        actualImageLink = bookDetailData.volumeINfo.imageLinks.smallThumbnail
+        actualImageLink = bookDetailData.volumeInfo.imageLinks.smallThumbnail
     } else {
         actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
     }
     console.log(actualImageLink);
     bookDetailImg.setAttribute("src", actualImageLink);
+
+
+    //related-search-terms
+    const auth = bookDetailData.volumeInfo.authors
+    const cats = bookDetailData.volumeInfo.categories
+    // const relatedCount = auth.length + cats.length;
+    const relSearchTerms = [];
+    if (auth.length + cats.length <= 5) {
+        //relatedSearchTerm Array buildout
+            for (let i=0; i < auth.length; i++) {
+                relSearchTerms.push(auth[i])
+            }
+            for (let i=0; i < cats.length; i++) {
+                relSearchTerms.push(cats[i])
+            }
+
+        }
+    console.log(relSearchTerms);
+
+    for (let i=0; i < relatedSearchCard.length;i++) {
+  relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i]}`);
+  relatedSearchCard[i].innerHTML = relSearchTerms[i];
+  relatedSearchCard[i].setAttribute("id",relSearchTerms[i]);
+    }
 }
 
 
