@@ -1,6 +1,7 @@
 import {menuIcon, openMenu} from "./navigation_module.js";
-import { bookSearch, makeBookRequest, bookButton } from "./searching_module.js";
+import { bookSearch, makeBookRequest, bookButton, setBookCard } from "./searching_module.js";
 
+let fullResult = "1234";
 
 // if the user click the search button it will generate a new book search
 const bookButtonEvent = bookButton.addEventListener("click", ()=>{
@@ -13,7 +14,9 @@ window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     let currentId = urlParams.get("id");
     bookSearch.value = currentId;
-    makeBookRequest(bookSearch);
+    fullResult = makeBookRequest(bookSearch);
+    console.log(fullResult);
+    // setBookCard(fullResult);
     
 };
 
@@ -22,7 +25,7 @@ window.onload = function () {
 menuIcon.onclick = openMenu;
 
 
-
+export {fullResult};
 
 
 

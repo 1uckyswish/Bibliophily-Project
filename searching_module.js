@@ -1,6 +1,9 @@
 // get empty elements from html
 // using a query to select all elements so i can target each one easier
 const bookSearch = document.querySelector(".content-nav input");
+
+const bookSearchTerm = bookSearch.value;
+
 const bookTitle = document.querySelectorAll(".book-title");
 const bookAuthor = document.querySelectorAll(".author");
 const bookDate = document.querySelectorAll(".date");
@@ -30,6 +33,60 @@ let fiveRelatedBooks;
 
 // api key that will be used with Template literals
 const apiKey = "AIzaSyBkVNpp07djnpcl_ueGOP6467hRX04BPAk";
+
+// // This function sets the content of book cards based on book data received from an API
+// const setBookCardOld = (bookData) => {
+//     // Get the number of books to display (minimum of 6 or total number of books)
+//     const bookCount = Math.min(bookData.items.length, 6);
+  
+//     // Loop through each book and set its content
+//     for (let i = 0; i < bookCount; i++) {
+//         // Get the book information and volume information for the current book
+//         const item = bookData.items[i];
+//         const volumeInfo = item.volumeInfo;
+  
+//         // Set the book title, display "Information Unavailable" if no title is available
+//         if (!volumeInfo.title) {
+//             bookTitle[i].innerText = "Information Unavailable";
+//         } else {
+//             bookTitle[i].innerText = volumeInfo.title;
+//         }
+  
+//         // Set the book image, display default image and "Information Unavailable" for author if no image link is available
+//         if (volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail) {
+//             bookImg[i].setAttribute("src", volumeInfo.imageLinks.thumbnail);
+//         } else {
+//             bookImg[i].setAttribute("src", "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg");
+//             bookAuthor[i].innerHTML = `Author: <span>Information Unavailable</span>`;
+//         }
+  
+//         // Set the book published date, display "Information Unavailable" if no published date is available
+//         if (volumeInfo.publishedDate) {
+//             bookDate[i].innerHTML = `Published Date: <span>${volumeInfo.publishedDate}</span>`;
+//         } else {
+//             bookDate[i].innerHTML = `Published Date: <span>Information Unavailable</span>`;
+//         }
+  
+//         // Set the book publisher, display "Information Unavailable" if no publisher is available
+//         if (volumeInfo.publisher) {
+//             bookPublish[i].innerHTML = `Publisher: <span>${volumeInfo.publisher}</span>`;
+//         } else {
+//             bookPublish[i].innerHTML = `Publisher: <span>Information Unavailable</span>`;
+//         }
+  
+//         // Set the book ID and author, display "Information Unavailable" if no author is available
+//         bookCard[i].setAttribute("id", item.id);
+//         bookAuthor[i].innerHTML = `Author: <span>${volumeInfo.authors || "Information Unavailable"}</span>`;
+        
+//         // Set the book detail button link
+//         bookDetailButton[i].setAttribute("href", `./details.html?id=${item.id}`);
+//     }
+  
+//     // Display an alert if no books were found
+//     if (!bookData.items || bookData.items.length === 0) {
+//         alert("Sorry No Books Found");
+//     }
+// };
 
 // This function sets the content of book cards based on book data received from an API
 const setBookCard = (bookData) => {
@@ -80,7 +137,7 @@ const setBookCard = (bookData) => {
     }
   
     // Display an alert if no books were found
-    if (!bookData.items || bookData.items.length === 0) {
+    if (!bookData.items|| bookData.items.length === 0) {
         alert("Sorry No Books Found");
     }
 };
@@ -129,7 +186,10 @@ const makeBookRequest = async (bookSearch) => {
             const result = await fetch(url);
             const json = await result.json();
             // const bookData = json.items.filter((book,index) => index < 6);
-            setBookCard(json);
+            // setBookCard(json);
+            console.log(json);
+            return json
+            
         }
         catch (error) {
             console.log(error);
