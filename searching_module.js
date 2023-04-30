@@ -135,25 +135,35 @@ const displayBookDetails = (bookDetailData) => {
 
     // console.log(bookDetailData.volumeInfo.imageLinks);
     let actualImageLink;
-    const availableImageObj = bookDetailData.volumeInfo.imageLinks;
-    if (availableImageObj.hasOwnProperty("medium")) {
-        actualImageLink = bookDetailData.volumeInfo.imageLinks.medium
-    } else if (availableImageObj.hasOwnProperty("small")) {
-        actualImageLink = bookDetailData.volumeInfo.imageLinks.small
-    } else if (availableImageObj.hasOwnProperty("smallThumbnail")) {
-        actualImageLink = bookDetailData.volumeInfo.imageLinks.smallThumbnail
-    } else {
-        actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
-    }
+    if (typeof bookDetailData.volumeInfo.imageLinks !== "undefined") {
+    let availableImageObj = bookDetailData.volumeInfo.imageLinks;
+    
+        if (availableImageObj.hasOwnProperty("medium")) {
+            actualImageLink = bookDetailData.volumeInfo.imageLinks.medium
+        } else if (availableImageObj.hasOwnProperty("small")) {
+            actualImageLink = bookDetailData.volumeInfo.imageLinks.small
+        } else if (availableImageObj.hasOwnProperty("smallThumbnail")) {
+            actualImageLink = bookDetailData.volumeInfo.imageLinks.smallThumbnail
+        } else {
+            actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
+        } } else {
+            actualImageLink = "https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg";
+        }
+    
     console.log(actualImageLink);
     bookDetailImg.setAttribute("src", actualImageLink);
-
+    
 
     //related-search-terms
     const auth = bookDetailData.volumeInfo.authors
     const cats = bookDetailData.volumeInfo.categories
     const title = bookDetailData.volumeInfo.title;
     const publisher = bookDetailData.volumeInfo.publisher;
+    const subtitle = bookDetailData.volumeInfo.subtitle;
+    const date = bookDetailData.volumeInfo.publishedDate;
+    const language = bookDetailData.volumeInfo.language;
+    const relPrintType = bookDetailData.volumeInfo.printType;
+    console.log(relPrintType);
     const relSearchTerms = [];
     
     
@@ -162,7 +172,7 @@ const displayBookDetails = (bookDetailData) => {
             for (let i=0; i < auth.length; i++) {
                 relSearchTerms.push(auth[i].replace("&","/"))
                 }
-            }
+            } else {relSearchTerms.push("Unknown Author")}
         if (bookDetailData.volumeInfo.hasOwnProperty("categories"))
             for (let i=0; i < cats.length; i++) {
                 relSearchTerms.push(cats[i].replace("&","/"))
@@ -170,8 +180,20 @@ const displayBookDetails = (bookDetailData) => {
             if (title != "undefined") {
                 relSearchTerms.push(title.replace("&","/"))
             }
-            if (publisher != "undefined") {
+            if (publisher != "undefined" && publisher !== "") {
                 relSearchTerms.push(publisher.replace("&","/"))
+            }
+            if (typeof subtitle != "undefined") {
+                relSearchTerms.push(subtitle.replace("&","/"))
+            }
+            if (date != "undefined") {
+                relSearchTerms.push(`Published: ${date.substring(0,4)}`.replace("&","/"))
+            }
+            if (language != "undefined") {
+                relSearchTerms.push(`Language: ${language}`.replace("&","/"))
+            }
+            if (relPrintType != "undefined") {
+                relSearchTerms.push(relPrintType.replace("&","/"))
             }
             
     console.log(relSearchTerms);
@@ -182,11 +204,10 @@ const displayBookDetails = (bookDetailData) => {
   relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i]}`);
   relatedSearchCard[i].innerHTML = relSearchTerms[i];
   relatedSearchCard[i].setAttribute("id",relSearchTerms[i]);
-            } else {relatedSearchCard[i].classList.toggle("hidden")}
+            } else {console.log("Search terms undefined")}
         } 
     } else {
-        relatedSearchContainer.classList.toggle("hidden");
-        relatedSearchHeader.classList.toggle("hidden");
+        //Class List Stuff
     }
 }
 
