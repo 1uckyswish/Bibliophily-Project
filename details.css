@@ -88,7 +88,7 @@ h2{
 
 }
 
-#related-search-container {
+.related-search-container {
     background-color: #ADAFAB;
     width: 88%;
     align-self: center;
@@ -100,20 +100,24 @@ h2{
     
 }
 
-#related-search-container a{
+.related-search-container a{
     height: 100%;
     width: 200px;
     max-width: 100%;
     padding: 10px;
    
-    
+}
 
+.hidden {
+    display: none;
 }
 
 .related-search-card {
     color: black;
     text-align: center;
 }
+
+
 
 
 /** media query tablet**/

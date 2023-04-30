@@ -17,7 +17,9 @@ const bookDetailSummary = document.querySelector("#book-detail-summary");
 const sampleButton = document.querySelector("#sample-button");
 const purchaseButton = document.querySelector("#purchase-button");
 
-const relatedSearchCard = document.querySelectorAll(".related-search-card")
+const relatedSearchCard = document.querySelectorAll(".related-search-card");
+const relatedSearchContainer = document.querySelector(".related-search-container");
+const relatedSearchHeader = document.querySelector(".related-search-header");
 
 // let bookDataG;
 let bookDetailId;
@@ -156,25 +158,35 @@ const displayBookDetails = (bookDetailData) => {
     
     
         //relatedSearchTerm Array buildout
+        if (bookDetailData.volumeInfo.hasOwnProperty("authors")) {
             for (let i=0; i < auth.length; i++) {
-                relSearchTerms.push(auth[i])
+                relSearchTerms.push(auth[i].replace("&","/"))
+                }
             }
+        if (bookDetailData.volumeInfo.hasOwnProperty("categories"))
             for (let i=0; i < cats.length; i++) {
-                relSearchTerms.push(cats[i])
+                relSearchTerms.push(cats[i].replace("&","/"))
             }
-            if (title != "Undefined") {
-                relSearchTerms.push(title)
+            if (title != "undefined") {
+                relSearchTerms.push(title.replace("&","/"))
             }
-            if (publisher != "Undefined") {
-                relSearchTerms.push(publisher)
+            if (publisher != "undefined") {
+                relSearchTerms.push(publisher.replace("&","/"))
             }
             
     console.log(relSearchTerms);
+    if (relSearchTerms.length > 1) {
 
-    for (let i=0; i < 5 ;i++) {
-  relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i].replace("&","/")}`);
-  relatedSearchCard[i].innerHTML = relSearchTerms[i].replace("&","/");
-  relatedSearchCard[i].setAttribute("id",relSearchTerms[i].replace("&","/"));
+    for (let i=0; i < relSearchTerms.length ;i++) {
+        if (relSearchTerms[i] != "undefined") {
+  relatedSearchCard[i].setAttribute("href",`./search.html?id=${relSearchTerms[i]}`);
+  relatedSearchCard[i].innerHTML = relSearchTerms[i];
+  relatedSearchCard[i].setAttribute("id",relSearchTerms[i]);
+            } else {relatedSearchCard[i].classList.toggle("hidden")}
+        } 
+    } else {
+        relatedSearchContainer.classList.toggle("hidden");
+        relatedSearchHeader.classList.toggle("hidden");
     }
 }
 
