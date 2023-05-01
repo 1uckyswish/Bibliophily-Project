@@ -235,6 +235,7 @@ footer img{
 
     span input{
         width: 80%;
+        font-size: 15px;
     }
 
     .content-nav p{
@@ -246,6 +247,7 @@ footer img{
     footer{
         display: flex;
         flex-direction: column-reverse;
+        padding-top: 100px;
         
     }
 
