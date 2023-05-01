@@ -219,6 +219,7 @@ footer img{
         display: block;
         font-size: 30px;
         color: var(--White-Text);
+        padding-right: 10px;
     }
 
     #searchImg{
