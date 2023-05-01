@@ -9,6 +9,7 @@ span img{
     cursor: pointer;
 }
 
+
 #search-results{
     background-color: var(--Background-color);
     height: auto;
@@ -170,10 +171,11 @@ span img{
     .card-container{
         display: flex;
         flex-direction: column;
+        height: auto;
     }
 
     .card{
-        height: 250px;
+        height: 290px;
     }
 
 
