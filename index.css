@@ -164,7 +164,7 @@ footer img{
 
 
 /** media query tablet**/
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     #searchImg{
         align-self: center;
         margin-bottom: 150px;
@@ -191,7 +191,7 @@ footer img{
 
 
 /** media query mobile **/
-@media (max-width: 428px){
+@media (max-width: 600px){
 
     .header-title{
         margin: auto;

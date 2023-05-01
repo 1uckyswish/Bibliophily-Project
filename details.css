@@ -136,7 +136,7 @@ h2{
 
 
 /** media query tablet**/
-@media (max-width: 768px){
+@media (max-width: 850px){
 
     .book-container{
         width: 80%;
@@ -187,7 +187,7 @@ h2{
 }
 
 
-@media screen and (max-width: 428px) {
+@media screen and (max-width: 600px) {
     
     .header-title{
         margin: auto;

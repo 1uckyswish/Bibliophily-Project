@@ -108,7 +108,7 @@ span img{
     color: #000000;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     .card-container{
         display: grid;
         grid-template-columns: repeat(2,minmax(300px,1fr));
@@ -139,7 +139,7 @@ span img{
     }
 }
 
-@media screen and (max-width: 428px) {
+@media screen and (max-width: 600px) {
     
     .header-title{
         margin: auto;
